@@ -55,6 +55,11 @@ namespace Ryujinx.Graphics.Shader.CodeGen.Spirv
             context.AddCapability(Capability.ImageQuery);
             context.AddCapability(Capability.SampledBuffer);
 
+            if (parameters.TargetApi == TargetApi.Vulkan)
+            {
+                context.AddCapability(Capability.StorageImageWriteWithoutFormat);
+            }
+
             if (parameters.HostCapabilities.SupportsShaderFloat64)
             {
                 context.AddCapability(Capability.Float64);
