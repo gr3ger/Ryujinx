@@ -464,6 +464,18 @@ namespace Ryujinx.Graphics.Vulkan
                 pExtendedFeatures = &featuresRobustness2;
             }
 
+            PhysicalDeviceTexelBufferAlignmentFeaturesEXT supportedFeaturesTexelBufferAlignment;
+            if (physicalDevice.IsDeviceExtensionPresent("VK_EXT_texel_buffer_alignment"))
+            {
+                supportedFeaturesTexelBufferAlignment = new PhysicalDeviceTexelBufferAlignmentFeaturesEXT
+                {
+                    SType = StructureType.PhysicalDeviceTexelBufferAlignmentFeaturesExt,
+                    PNext = pExtendedFeatures,
+                    TexelBufferAlignment = true
+                };
+                pExtendedFeatures = &supportedFeaturesTexelBufferAlignment;
+            }
+
             var featuresExtendedDynamicState = new PhysicalDeviceExtendedDynamicStateFeaturesEXT
             {
                 SType = StructureType.PhysicalDeviceExtendedDynamicStateFeaturesExt,
